@@ -52,6 +52,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Tests\EditModeTests\StatusEffectsTests.cs" />
+     <Compile Include="Assets\Tests\EditModeTests\StatsTest.cs" />
      <Compile Include="Assets\Tests\EditModeTests\TargetSelecterEditTests.cs" />
      <None Include="Assets\Tests\EditModeTests\EditModeTests.asmdef" />
  <Reference Include="UnityEngine">

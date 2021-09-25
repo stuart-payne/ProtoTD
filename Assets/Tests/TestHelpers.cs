@@ -37,14 +37,32 @@ namespace Tests
             }
             return scriptObj;
         }
-    
+
         public static Vector3[] GetTestWayPoints()
         {
-            return new [] {
+            return new[]
+            {
                 new Vector3(0, 1, 0),
                 new Vector3(0, 2, 0),
                 new Vector3(0, 3, 0),
             };
         }
+        
+        public static StatusEffects<TestStats> SetUpTestStatusEffectsObject()
+        {
+            var gObj = new GameObject();
+            var coroutineProvider = gObj.AddComponent<CoroutineProvider>();
+            return new StatusEffects<TestStats>(coroutineProvider);
+        }
+    }
+    
+    public class CoroutineProvider : MonoBehaviour, ICoroutineHandler
+    { }
+
+    public enum TestStats
+    {
+        Health,
+        Damage,
+        Speed
     }
 }
