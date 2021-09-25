@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour
@@ -13,11 +11,11 @@ public abstract class BaseEnemy : MonoBehaviour
 
     public float GetDistanceFromEnd()
     {
-        float distance = 0.0f;
+        var dist = 0.0f;
         for (var i = m_WaypointIndex; i < m_Waypoints.Length; i++)
         {
-            distance += Vector3.Distance(transform.position, m_Waypoints[i]);
+            dist += Vector3.Distance(transform.position, m_Waypoints[i]);
         }
-        return distance;
+        return dist;
     }
 }

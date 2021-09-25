@@ -10,7 +10,7 @@ public class TowerDisplayManager : MonoBehaviour
     Func<int, bool> m_FundChecker;
     Action<int> m_FundRemover;
 
-    Dictionary<Strategy, string> m_StrategyStrings = new Dictionary<Strategy, string>
+    readonly Dictionary<Strategy, string> m_StrategyStrings = new Dictionary<Strategy, string>
     {
         { Strategy.ClosestToGoal, "First"},
         { Strategy.FurthestFromGoal, "Last" },
@@ -37,12 +37,12 @@ public class TowerDisplayManager : MonoBehaviour
 
     void TowerDisplayListener(BaseTower tower)
     {
-        Debug.Log($"StatSO: {tower.Stats.Name} id: {tower.Id}");
+        Debug.Log($"StatSO: {tower.Stats.Name} id: {tower.Id.ToString()}");
         m_TowerDisplayUI.gameObject.SetActive(true);
         m_SelectedTower = tower;
         TowerStatsSO stats = tower.GetTowerStats;
         m_TowerDisplayUI.TowerName.SetValue(stats.Name);
-        m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost}");
+        m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost.ToString()}");
         m_TowerDisplayUI.Strategy.gameObject.SetActive(true);
         m_TowerDisplayUI.Strategy.DropdownBuilder.PopulateInterfaces(GenerateStrategyList(tower), ChangeTowerStrategy);
         var upgrader = tower.GetUpgrader;
@@ -68,7 +68,7 @@ public class TowerDisplayManager : MonoBehaviour
         m_SelectedTower = null;
         var stats = placeable.GetTowerStats;
         m_TowerDisplayUI.TowerName.SetValue(stats.Name);
-        m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost}");
+        m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost.ToString()}");
         m_TowerDisplayUI.gameObject.SetActive(true);
         m_TowerDisplayUI.Strategy.gameObject.SetActive(false);
     }
