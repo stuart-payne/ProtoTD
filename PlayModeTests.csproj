@@ -643,6 +643,10 @@
       <Project>{7f25a031-b6d0-32c0-3ca0-918927f847b8}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="Tests.csproj">
+      <Project>{324c1df6-1f45-c14a-2231-551b60058c93}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{f4550037-04f0-2464-ff6e-98d08064c9d6}</Project>
       <Name>UnityEditor.UI</Name>

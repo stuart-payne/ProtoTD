@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class BaseEnemy : MonoBehaviour
 {
     protected Vector3[] m_Waypoints;
+    
     protected int m_WaypointIndex;
     public void SetWaypoints(Vector3[] waypoints)
     {

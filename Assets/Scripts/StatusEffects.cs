@@ -21,6 +21,7 @@ public class StatusEffects<T> where T: Enum
     private Dictionary<T, float> m_Modifiers = new Dictionary<T, float>();
     private Dictionary<T, Coroutine> m_StatusDurations = new Dictionary<T, Coroutine>();
     private ICoroutineHandler m_CoroutineHandler;
+    private float m_Value;
 
     public StatusEffects(ICoroutineHandler coroutineHandler)
     {
@@ -49,14 +50,8 @@ public class StatusEffects<T> where T: Enum
 
     public float GetModifier(T stat) => m_Modifiers[stat];
 
-    public float this[T stat]
-    {
-        get {
-            float value;
-            return m_Modifiers.TryGetValue(stat, out value) ? value : 1.0f;
-        }
-    }
-
+    public float this[T stat] => m_Modifiers.TryGetValue(stat, out m_Value) ? m_Value : 1.0f;
+    
     public Dictionary<T, float> GetModifierDict() => m_Modifiers;
 
     IEnumerator DurationCoroutine(float duration, T stat)

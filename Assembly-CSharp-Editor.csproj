@@ -759,6 +759,10 @@
       <Project>{a3bc2849-0a8c-dd24-e763-4b50c349274e}</Project>
       <Name>Unity.RenderPipelines.Core.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Tests.csproj">
+      <Project>{324c1df6-1f45-c14a-2231-551b60058c93}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
