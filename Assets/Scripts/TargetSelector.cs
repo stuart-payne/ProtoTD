@@ -8,6 +8,7 @@ namespace ProtoTD
     public class TargetSelector
     {
         public GameObject CurrentTarget;
+        public Strategy SelectedStrategy;
         private List<Enemy> m_Targets = new List<Enemy>();
         private Func<Enemy> m_CurrentStrategy;
 
@@ -54,6 +55,8 @@ namespace ProtoTD
                     m_CurrentStrategy = NotSlowedAndStrongest;
                     break;
             }
+
+            SelectedStrategy = strategy;
         }
 
         Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).First();

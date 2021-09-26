@@ -20,7 +20,7 @@ namespace ProtoTD
         void Start()
         {
             m_Money = GetComponent<Money>();
-            m_BuildTowerDropdown.PopulateInterfaces(GetDropdownOptions(), index => SpawnPlaceableTower(index));
+            m_BuildTowerDropdown.PopulateInterfaces(GetDropdownOptions(), index => SpawnPlaceableTower(index), 0);
             //InvokeRepeating("SpawnEnemy", 2.0f, 2.0f);
         }
 

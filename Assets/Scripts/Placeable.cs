@@ -16,6 +16,7 @@ namespace ProtoTD
         [SerializeField] private Material m_PlaceableMat;
         [SerializeField] private Material m_UnplaceableMat;
         [SerializeField] private GameObject m_PrefabToPlace;
+        [SerializeField] private RangeIndicator m_RangeIndicator;
         private Plane m_Plane;
         private bool m_IsPlaceable = true;
         private List<Collider> m_Colliders = new List<Collider>();
@@ -29,6 +30,7 @@ namespace ProtoTD
         {
             m_Plane = new Plane(Ground.transform.up, Ground.transform.position);
             m_TowerCollider = GetComponent<BoxCollider>();
+            m_RangeIndicator.UpdateRadius(Stats.FiringRange);
             rend = GetComponent<Renderer>();
             OnPlaceableSpawned?.Invoke(this);
         }

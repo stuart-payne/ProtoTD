@@ -14,10 +14,11 @@ namespace ProtoTD
             ;
         }
 
-        public virtual void PopulateInterfaces(List<string> options, UnityAction<int> listener)
+        public virtual void PopulateInterfaces(List<string> options, UnityAction<int> listener, int selected)
         {
             m_Dropdown.ClearOptions();
             m_Dropdown.AddOptions(options);
+            m_Dropdown.value = selected;
             m_Dropdown.onValueChanged.AddListener(listener);
         }
     }

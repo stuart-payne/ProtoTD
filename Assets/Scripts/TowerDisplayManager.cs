@@ -17,7 +17,9 @@ namespace ProtoTD
         {
             { Strategy.ClosestToGoal, "First"},
             { Strategy.FurthestFromGoal, "Last" },
-            { Strategy.Strongest, "Strongest" }
+            { Strategy.Strongest, "Strongest" },
+            { Strategy.NotSlowed, "Not Slowed" },
+            { Strategy.NotSlowedAndStrongest, "Not Slow & Strong" }
         };
         // Start is called before the first frame update
         void Start()
@@ -35,7 +37,7 @@ namespace ProtoTD
             if(Input.GetKeyDown(KeyCode.Mouse1))
             {
                 m_TowerDisplayUI.DisableDisplay();
-                m_SelectedTower.DeactivateRangeIndicator();
+                m_SelectedTower?.DeactivateRangeIndicator();
             }
         }
 
@@ -50,7 +52,10 @@ namespace ProtoTD
             m_TowerDisplayUI.TowerName.SetValue(stats.Name);
             m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost.ToString()}");
             m_TowerDisplayUI.Strategy.gameObject.SetActive(true);
-            m_TowerDisplayUI.Strategy.DropdownBuilder.PopulateInterfaces(GenerateStrategyList(tower), ChangeTowerStrategy);
+            string selectedStrategyStr = m_StrategyStrings[tower.GetTargetSelector.SelectedStrategy];
+            var stringList = GenerateStrategyList(tower);
+            int selectedInd = stringList.IndexOf(selectedStrategyStr);
+            m_TowerDisplayUI.Strategy.DropdownBuilder.PopulateInterfaces(stringList, ChangeTowerStrategy, selectedInd);
             var upgrader = tower.GetUpgrader;
             if (upgrader.Upgradeable())
                 m_TowerDisplayUI.AddUpgradeButtonListener(tower.GetUpgrader, m_FundChecker, m_FundRemover);
@@ -66,7 +71,7 @@ namespace ProtoTD
 
         List<string> GenerateStrategyList(ITargetConfigurable targetConfigurable)
         {
-            return targetConfigurable.GetPossibleStrategies.Select(x => m_StrategyStrings[x]).ToList();
+            return m_StrategyStrings.Where(x => targetConfigurable.GetPossibleStrategies.Contains(x.Key)).Select(x => x.Value).ToList();
         }
 
         void PlaceableDisplayListener(IDisplayable placeable)
