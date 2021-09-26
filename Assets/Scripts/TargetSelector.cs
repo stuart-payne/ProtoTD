@@ -3,78 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TargetSelector
+namespace ProtoTD
 {
-    public GameObject CurrentTarget;
-    private List<Enemy> m_Targets = new List<Enemy>();
-    private Func<Enemy> m_CurrentStrategy;
-
-    public TargetSelector(Strategy startingStrategy)
+    public class TargetSelector
     {
-        ChangeStrategy(startingStrategy);
-    }
+        public GameObject CurrentTarget;
+        private List<Enemy> m_Targets = new List<Enemy>();
+        private Func<Enemy> m_CurrentStrategy;
 
-    public bool SelectTarget()
-    {
-        if (m_Targets.Count == 0)
-            return false;
-        CurrentTarget = m_CurrentStrategy().gameObject;
-        return true;
-    }
-
-    public void AddTarget(Enemy enemy)
-    {
-        m_Targets.Add(enemy);
-    }
-
-    public void RemoveTarget(Enemy enemy)
-    {
-        m_Targets.Remove(enemy);
-    }
-
-    public void ChangeStrategy(Strategy strategy)
-    {
-        switch(strategy)
+        public TargetSelector(Strategy startingStrategy)
         {
-            case Strategy.ClosestToGoal:
-                m_CurrentStrategy = ClosestTargetToGoal;
-                break;
-            case Strategy.FurthestFromGoal:
-                m_CurrentStrategy = FurthestTargetFromGoal;
-                break;
-            case Strategy.Strongest:
-                m_CurrentStrategy = StrongestEnemy;
-                break;
-            case Strategy.NotSlowed:
-                m_CurrentStrategy = NotSlowedAndClosestToEnd;
-                break;
-            case Strategy.NotSlowedAndStrongest:
-                m_CurrentStrategy = NotSlowedAndStrongest;
-                break;
+            ChangeStrategy(startingStrategy);
         }
-    }
 
-    Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).First();
+        public bool SelectTarget()
+        {
+            if (m_Targets.Count == 0)
+                return false;
+            CurrentTarget = m_CurrentStrategy().gameObject;
+            return true;
+        }
 
-    Enemy FurthestTargetFromGoal() => m_Targets.OrderByDescending(x => x.GetDistanceFromEnd()).First();
+        public void AddTarget(Enemy enemy)
+        {
+            m_Targets.Add(enemy);
+        }
 
-    Enemy StrongestEnemy() => m_Targets.OrderByDescending(x => x.Stats.GetBaseValue(EnemyStat.Health)).First();
+        public void RemoveTarget(Enemy enemy)
+        {
+            m_Targets.Remove(enemy);
+        }
 
-    Enemy NotSlowedAndClosestToEnd()
-    {
-        var targets = m_Targets.OrderBy(x => x.GetDistanceFromEnd());
-        return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.First();
-    }
+        public void ChangeStrategy(Strategy strategy)
+        {
+            switch(strategy)
+            {
+                case Strategy.ClosestToGoal:
+                    m_CurrentStrategy = ClosestTargetToGoal;
+                    break;
+                case Strategy.FurthestFromGoal:
+                    m_CurrentStrategy = FurthestTargetFromGoal;
+                    break;
+                case Strategy.Strongest:
+                    m_CurrentStrategy = StrongestEnemy;
+                    break;
+                case Strategy.NotSlowed:
+                    m_CurrentStrategy = NotSlowedAndClosestToEnd;
+                    break;
+                case Strategy.NotSlowedAndStrongest:
+                    m_CurrentStrategy = NotSlowedAndStrongest;
+                    break;
+            }
+        }
 
-    Enemy NotSlowedAndStrongest()
-    {
-        var targets = m_Targets.OrderBy(x => x.Stats.GetBaseValue(EnemyStat.Health));
-        return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.First();
-    }
+        Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).First();
+
+        Enemy FurthestTargetFromGoal() => m_Targets.OrderByDescending(x => x.GetDistanceFromEnd()).First();
+
+        Enemy StrongestEnemy() => m_Targets.OrderByDescending(x => x.Stats.GetBaseValue(EnemyStat.Health)).First();
+
+        Enemy NotSlowedAndClosestToEnd()
+        {
+            var targets = m_Targets.OrderBy(x => x.GetDistanceFromEnd());
+            return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.First();
+        }
+
+        Enemy NotSlowedAndStrongest()
+        {
+            var targets = m_Targets.OrderBy(x => x.Stats.GetBaseValue(EnemyStat.Health));
+            return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.First();
+        }
      
-}
+    }
 
-public enum Strategy
-{
-    ClosestToGoal, FurthestFromGoal, Strongest, NotSlowed, NotSlowedAndStrongest
+    public enum Strategy
+    {
+        ClosestToGoal, FurthestFromGoal, Strongest, NotSlowed, NotSlowedAndStrongest
+    }
 }

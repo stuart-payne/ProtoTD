@@ -1,4 +1,8 @@
 using UnityEngine.Events;
-public interface IDropdownListener {
-    UnityAction<int> GetDropdownListenerAction();
+
+namespace ProtoTD.Interfaces
+{
+    public interface IDropdownListener {
+        UnityAction<int> GetDropdownListenerAction();
+    }
 }

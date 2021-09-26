@@ -1,31 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WaypointManager : MonoBehaviour
+namespace ProtoTD
 {
-    [SerializeField] private GameObject[] waypoints;
-
-    public static WaypointManager Instance;
-
-    private void Awake()
+    public class WaypointManager : MonoBehaviour
     {
-        if(Instance == null)
+        [SerializeField] private GameObject[] waypoints;
+
+        public static WaypointManager Instance;
+
+        private void Awake()
         {
-            Instance = this;
-        } else
-        {
-            Destroy(gameObject);
+            if(Instance == null)
+            {
+                Instance = this;
+            } else
+            {
+                Destroy(gameObject);
+            }
         }
-    }
 
-    public Vector3 GetNextWaypoint(int index)
-    {
-        return waypoints[index].transform.position;
-    }
+        public Vector3 GetNextWaypoint(int index)
+        {
+            return waypoints[index].transform.position;
+        }
 
-    public Vector3 GetStartPoint()
-    {
-        return waypoints[0].transform.position;
+        public Vector3 GetStartPoint()
+        {
+            return waypoints[0].transform.position;
+        }
     }
 }

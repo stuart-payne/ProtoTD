@@ -1,113 +1,116 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class WaveManager : MonoBehaviour
+namespace ProtoTD
 {
-    public WaveSO[] Waves;
-    public bool IsWaveInProgress;
-    public Button button;
-
-    private SpawnManager m_Spawner;
-    private WaveEnumerator m_WaveEnumerator;
-    private WaveSO m_CurrentWave;
-
-
-    private void Start()
+    public class WaveManager : MonoBehaviour
     {
-        IsWaveInProgress = false;
-        m_Spawner = GetComponent<SpawnManager>();
-        m_WaveEnumerator = new WaveEnumerator(Waves);
-    }
+        public WaveSO[] Waves;
+        public bool IsWaveInProgress;
+        public Button button;
 
-    private void Update()
-    {
-        if (IsWaveInProgress)
-            button.interactable = false;
-        else
-            button.interactable = true;
-    }
+        private SpawnManager m_Spawner;
+        private WaveEnumerator m_WaveEnumerator;
+        private WaveSO m_CurrentWave;
 
-    public void StartWave()
-    {
-        if(m_WaveEnumerator.MoveNext())
+
+        private void Start()
         {
-            m_CurrentWave = m_WaveEnumerator.Current;
-            IsWaveInProgress = true;
-            StartCoroutine(ExecuteWave(m_CurrentWave));
+            IsWaveInProgress = false;
+            m_Spawner = GetComponent<SpawnManager>();
+            m_WaveEnumerator = new WaveEnumerator(Waves);
+        }
 
-        } else
+        private void Update()
         {
-            Debug.Log("HIt end of Ienumerator");
-            // trigger level complete
+            if (IsWaveInProgress)
+                button.interactable = false;
+            else
+                button.interactable = true;
+        }
+
+        public void StartWave()
+        {
+            if(m_WaveEnumerator.MoveNext())
+            {
+                m_CurrentWave = m_WaveEnumerator.Current;
+                IsWaveInProgress = true;
+                StartCoroutine(ExecuteWave(m_CurrentWave));
+
+            } else
+            {
+                Debug.Log("HIt end of Ienumerator");
+                // trigger level complete
+            }
+        }
+
+        IEnumerator ExecuteWave(WaveSO wave)
+        {
+            foreach(var enemyString in wave.SpawnStrings)
+            {
+                yield return StartCoroutine(ExecuteEnemyString(enemyString));
+            }
+            IsWaveInProgress = false;
+        }
+
+        IEnumerator ExecuteEnemyString(EnemySpawnString enemySpawnString)
+        {
+            yield return new WaitForSeconds(enemySpawnString.StartDelay);
+            for(var i = 0; i < enemySpawnString.numberOfEnemies; i++)
+            {
+                m_Spawner.SpawnEnemy(enemySpawnString.EnemyPrefab, m_WaveEnumerator.CurrentIndex);
+                yield return new WaitForSeconds(enemySpawnString.TimeBetweenSpawns);
+            }
         }
     }
 
-    IEnumerator ExecuteWave(WaveSO wave)
+    public class WaveEnumerator: IEnumerator<WaveSO>
     {
-        foreach(var enemyString in wave.SpawnStrings)
+        private WaveSO[] m_Waves;
+        private WaveSO m_CurrentWave;
+        private int m_CurrentIndex;
+
+        public WaveEnumerator(WaveSO[] waves)
         {
-            yield return StartCoroutine(ExecuteEnemyString(enemyString));
+            m_Waves = waves;
+            m_CurrentIndex = -1;
         }
-        IsWaveInProgress = false;
-    }
 
-    IEnumerator ExecuteEnemyString(EnemySpawnString enemySpawnString)
-    {
-        yield return new WaitForSeconds(enemySpawnString.StartDelay);
-        for(var i = 0; i < enemySpawnString.numberOfEnemies; i++)
+        public bool MoveNext()
         {
-            m_Spawner.SpawnEnemy(enemySpawnString.EnemyPrefab, m_WaveEnumerator.CurrentIndex);
-            yield return new WaitForSeconds(enemySpawnString.TimeBetweenSpawns);
+            if(++m_CurrentIndex >= m_Waves.Length)
+            {
+                return false;
+            } else
+            {
+                m_CurrentWave = m_Waves[m_CurrentIndex];
+            }
+            return true;
         }
-    }
-}
 
-public class WaveEnumerator: IEnumerator<WaveSO>
-{
-    private WaveSO[] m_Waves;
-    private WaveSO m_CurrentWave;
-    private int m_CurrentIndex;
+        public void Reset() => m_CurrentIndex = -1;
 
-    public WaveEnumerator(WaveSO[] waves)
-    {
-        m_Waves = waves;
-        m_CurrentIndex = -1;
-    }
+        void IDisposable.Dispose() { }
 
-    public bool MoveNext()
-    {
-        if(++m_CurrentIndex >= m_Waves.Length)
+        public WaveSO Current
         {
-            return false;
-        } else
-        {
-            m_CurrentWave = m_Waves[m_CurrentIndex];
+            get { return m_CurrentWave; }
         }
-        return true;
-    }
-
-    public void Reset() => m_CurrentIndex = -1;
-
-    void IDisposable.Dispose() { }
-
-    public WaveSO Current
-    {
-        get { return m_CurrentWave; }
-    }
 
 
-    public int CurrentIndex
-    {
-        get { return m_CurrentIndex; }
-    }
+        public int CurrentIndex
+        {
+            get { return m_CurrentIndex; }
+        }
 
 
-    object IEnumerator.Current
-    {
-        get { return Current; }
+        object IEnumerator.Current
+        {
+            get { return Current; }
+        }
     }
 }

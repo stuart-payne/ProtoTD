@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using ProtoTD;
 using UnityEngine;
 
-namespace Tests
+namespace ProtoTD.Tests
 {
     public class TestHelpers
     {

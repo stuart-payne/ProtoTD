@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IDisplayable
+namespace ProtoTD.Interfaces
 {
-    TowerStatsSO GetTowerStats { get; }
+    public interface IDisplayable
+    {
+        TowerStatsSO GetTowerStats { get; }
+    }
 }

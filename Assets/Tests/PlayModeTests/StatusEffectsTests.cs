@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using UnityEngine.TestTools;
 using UnityEngine;
+using ProtoTD.Tests;
 using Tests;
 
 namespace Tests.PlayModeTests

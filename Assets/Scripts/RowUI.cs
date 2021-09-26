@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class RowUI : MonoBehaviour
+namespace ProtoTD
 {
-    [SerializeField] TextMeshProUGUI m_Label;
-    [SerializeField] TextMeshProUGUI m_Value;
-
-    public void SetValue(string value)
+    public class RowUI : MonoBehaviour
     {
-        m_Value.text = value;
+        [SerializeField] TextMeshProUGUI m_Label;
+        [SerializeField] TextMeshProUGUI m_Value;
+
+        public void SetValue(string value)
+        {
+            m_Value.text = value;
+        }
     }
 }

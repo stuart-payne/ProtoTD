@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClosePanel : MonoBehaviour
+namespace ProtoTD
 {
-
-    public Button CloseButton;
-    // Start is called before the first frame update
-    void Start()
+    public class ClosePanel : MonoBehaviour
     {
-        CloseButton.onClick.AddListener(ClosePanelCB);
-    }
 
-    void ClosePanelCB() => gameObject.SetActive(false);
+        public Button CloseButton;
+        // Start is called before the first frame update
+        void Start()
+        {
+            CloseButton.onClick.AddListener(ClosePanelCB);
+        }
+
+        void ClosePanelCB() => gameObject.SetActive(false);
+    }
 }

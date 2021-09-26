@@ -1,43 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-[CreateAssetMenu()]
-public class EnemyStatsSO : ScriptableObject
+namespace ProtoTD
 {
-    public string Name;
-    public List<EnemyStatField> BaseStats;
-
-    public Dictionary<EnemyStat, int> GenerateStatDict()
+    [CreateAssetMenu()]
+    public class EnemyStatsSO : ScriptableObject
     {
-        var dict = new Dictionary<EnemyStat, int>();
-        foreach(var stat in BaseStats)
+        public string Name;
+        public List<EnemyStatField> BaseStats;
+
+        public Dictionary<EnemyStat, int> GenerateStatDict()
         {
-            dict.Add(stat.Stat, stat.Value);
+            var dict = new Dictionary<EnemyStat, int>();
+            foreach(var stat in BaseStats)
+            {
+                dict.Add(stat.Stat, stat.Value);
+            }
+            return dict;
         }
-        return dict;
     }
-}
 
-[Serializable]
-public class EnemyStatField
-{
-    public EnemyStat Stat;
-    public int Value;
-
-    public EnemyStatField(EnemyStat stat, int value)
+    [Serializable]
+    public class EnemyStatField
     {
-        Stat = stat;
-        Value = value;
-    }
-}
+        public EnemyStat Stat;
+        public int Value;
 
-public enum EnemyStat
-{
-    Health,
-    ScoreValue,
-    MoneyValue,
-    Speed,
-    DamageTaken
+        public EnemyStatField(EnemyStat stat, int value)
+        {
+            Stat = stat;
+            Value = value;
+        }
+    }
+
+    public enum EnemyStat
+    {
+        Health,
+        ScoreValue,
+        MoneyValue,
+        Speed,
+        DamageTaken
+    }
 }

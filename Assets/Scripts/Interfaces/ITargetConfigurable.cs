@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITargetConfigurable
+namespace ProtoTD.Interfaces
 {
-    Strategy[] GetPossibleStrategies { get; }
-    TargetSelector GetTargetSelector { get; }
+    public interface ITargetConfigurable
+    {
+        Strategy[] GetPossibleStrategies { get; }
+        TargetSelector GetTargetSelector { get; }
+    }
 }

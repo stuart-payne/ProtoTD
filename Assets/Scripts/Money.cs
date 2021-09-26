@@ -1,37 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class Money : MonoBehaviour
+namespace ProtoTD
 {
-    [SerializeField] private TextMeshProUGUI m_MoneyText;
-    public int MoneyAvailable
+    public class Money : MonoBehaviour
     {
-        get => _moneyAvailable;
-        private set
+        [SerializeField] private TextMeshProUGUI m_MoneyText;
+        public int MoneyAvailable
         {
-            _moneyAvailable = value;
+            get => _moneyAvailable;
+            private set
+            {
+                _moneyAvailable = value;
+                UpdateText();
+            }
+        }
+
+        private int _moneyAvailable = 500;
+
+        private void Start()
+        {
+            Enemy.OnDeathEvent += AddFundsOnEnemyDeath;
             UpdateText();
         }
-    }
 
-    private int _moneyAvailable = 500;
+        void UpdateText() => m_MoneyText.text = MoneyAvailable.ToString();
+        public bool HasFundsAvailable(int money) => MoneyAvailable >= money;
 
-    private void Start()
-    {
-        Enemy.OnDeathEvent += AddFundsOnEnemyDeath;
-        UpdateText();
-    }
+        public void RemoveFunds(int money) => MoneyAvailable -= money;
+        public void AddFunds(int money) => MoneyAvailable += money;
 
-    void UpdateText() => m_MoneyText.text = MoneyAvailable.ToString();
-    public bool HasFundsAvailable(int money) => MoneyAvailable >= money;
-
-    public void RemoveFunds(int money) => MoneyAvailable -= money;
-    public void AddFunds(int money) => MoneyAvailable += money;
-
-    public void AddFundsOnEnemyDeath(StatContainer<EnemyStat> stats)
-    {
-        MoneyAvailable += stats[EnemyStat.MoneyValue];
+        public void AddFundsOnEnemyDeath(StatContainer<EnemyStat> stats)
+        {
+            MoneyAvailable += stats[EnemyStat.MoneyValue];
+        }
     }
 }

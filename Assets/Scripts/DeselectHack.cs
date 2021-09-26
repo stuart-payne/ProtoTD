@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DeselectHack : MonoBehaviour
+namespace ProtoTD
 {
-    [SerializeField] TowerDisplayUI m_TowerDisplay;
-
-    private void OnMouseDown()
+    public class DeselectHack : MonoBehaviour
     {
-        m_TowerDisplay.DisableDisplay();
+        [SerializeField] TowerDisplayUI m_TowerDisplay;
+
+        private void OnMouseDown()
+        {
+            m_TowerDisplay.DisableDisplay();
+        }
     }
 }

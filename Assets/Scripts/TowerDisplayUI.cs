@@ -1,41 +1,42 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
-public class TowerDisplayUI : MonoBehaviour
+namespace ProtoTD
 {
-    public RowUI TowerName;
-    public RowUI Cost;
-    public RowUIDropdown Strategy;
-    public Button Upgrade;
-    public UpgradeUI UpgradeUI;
-
-    private void ResetButtonListeners()
+    public class TowerDisplayUI : MonoBehaviour
     {
-        Upgrade.onClick.RemoveAllListeners();
-    }
+        public RowUI TowerName;
+        public RowUI Cost;
+        public RowUIDropdown Strategy;
+        public Button Upgrade;
+        public UpgradeUI UpgradeUI;
 
-    public void DisableUpgradeButton()
-    {
-        Upgrade.gameObject.SetActive(false);
-    }
-
-    public void DisableDisplay()
-    {
-        UpgradeUI.gameObject.SetActive(false);
-        gameObject.SetActive(false);
-    }
-
-    public void AddUpgradeButtonListener(Upgrader upgrader, Func<int, bool> fundChecker, Action<int> fundRemover)
-    {
-        Upgrade.gameObject.SetActive(true);
-        ResetButtonListeners();
-        Upgrade.onClick.AddListener(() =>
+        private void ResetButtonListeners()
         {
-            UpgradeUI.gameObject.SetActive(true);
-            UpgradeUI.SetUpgrader(upgrader, fundChecker, DisableDisplay, fundRemover);
-        });
+            Upgrade.onClick.RemoveAllListeners();
+        }
+
+        public void DisableUpgradeButton()
+        {
+            Upgrade.gameObject.SetActive(false);
+        }
+
+        public void DisableDisplay()
+        {
+            UpgradeUI.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+
+        public void AddUpgradeButtonListener(Upgrader upgrader, Func<int, bool> fundChecker, Action<int> fundRemover)
+        {
+            Upgrade.gameObject.SetActive(true);
+            ResetButtonListeners();
+            Upgrade.onClick.AddListener(() =>
+            {
+                UpgradeUI.gameObject.SetActive(true);
+                UpgradeUI.SetUpgrader(upgrader, fundChecker, DisableDisplay, fundRemover);
+            });
+        }
     }
 }

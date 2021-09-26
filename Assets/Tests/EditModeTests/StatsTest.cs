@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 using System;
+using ProtoTD;
+using ProtoTD.Tests;
 
 public class StatsTest
 {

@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class RowUIDropdown : MonoBehaviour
+namespace ProtoTD
 {
-    [SerializeField] TextMeshProUGUI m_Label;
-    public BuildDropdown DropdownBuilder;
+    public class RowUIDropdown : MonoBehaviour
+    {
+        [SerializeField] TextMeshProUGUI m_Label;
+        public BuildDropdown DropdownBuilder;
+    }
 }

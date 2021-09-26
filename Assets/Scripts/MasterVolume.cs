@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MasterVolume : MonoBehaviour
+namespace ProtoTD
 {
-    public Slider VolumeSlider;
-
-    private void Start()
+    public class MasterVolume : MonoBehaviour
     {
-        VolumeSlider.onValueChanged.AddListener(MasterVolumeUpdate);
-    }
+        public Slider VolumeSlider;
 
-    public void MasterVolumeUpdate(float value)
-    {
-        AudioListener.volume = value;
+        private void Start()
+        {
+            VolumeSlider.onValueChanged.AddListener(MasterVolumeUpdate);
+        }
+
+        public void MasterVolumeUpdate(float value)
+        {
+            AudioListener.volume = value;
+        }
     }
 }

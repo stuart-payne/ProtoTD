@@ -1,5 +1,9 @@
 using System.Collections.Generic;
-public interface IDropdownOptionProvider
+
+namespace ProtoTD.Interfaces
 {
-    List<string> GetDropdownOptions();
+    public interface IDropdownOptionProvider
+    {
+        List<string> GetDropdownOptions();
+    }
 }
