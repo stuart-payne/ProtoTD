@@ -5,30 +5,33 @@ namespace ProtoTD
 {
     public class ScoreManager : MonoBehaviour
     {
-        [SerializeField] int m_Lives;
+        [SerializeField] private int m_Lives;
+        [SerializeField] private GameoverPanel m_GameoverPanel;
+        [SerializeField] private LevelManager m_LevelManager;
         public TextMeshProUGUI ScoreTextElement;
         public TextMeshProUGUI LivesTextElement;
 
         public int Lives
         {
             get => m_Lives;
-            set {
+            set
+            {
                 m_Lives = value;
                 UpdateLivesText();
                 if (m_Lives == 0) GameOver();
             }
         }
-        public int Score { get 
-            {
-                return m_Score;   
-            } 
-            private set 
+
+        public int Score
+        {
+            get { return m_Score; }
+            private set
             {
                 m_Score = value;
                 if (m_Score < 0)
                     m_Score = 0;
                 UpdateScoreText();
-            } 
+            }
         }
 
         private int m_Score = 0;
@@ -69,9 +72,9 @@ namespace ProtoTD
 
         void GameOver()
         {
-            // Implement game over logic
-            Debug.Log("Gameover");
+            Time.timeScale = 0.0f;
+            m_GameoverPanel.gameObject.SetActive(true);
+            m_GameoverPanel.GiveData(Score, m_LevelManager.RestartScene);
         }
-
     }
 }

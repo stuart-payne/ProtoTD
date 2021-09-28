@@ -6,6 +6,7 @@ namespace ProtoTD
     public class Money : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI m_MoneyText;
+
         public int MoneyAvailable
         {
             get => _moneyAvailable;

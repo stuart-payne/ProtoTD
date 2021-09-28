@@ -32,6 +32,13 @@ namespace ProtoTD
             m_FundRemover = moneyComponent.RemoveFunds;
         }
 
+        private void OnDestroy()
+        {
+            BaseTower.OnTowerClicked -= TowerDisplayListener;
+            Placeable.OnPlaceableSpawned -= PlaceableDisplayListener;
+            Placeable.OnPlaceableDestroyed -= OnPlaceableDestroyedListener;
+        }
+
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.Mouse1))

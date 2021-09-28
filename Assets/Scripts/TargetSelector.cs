@@ -37,7 +37,7 @@ namespace ProtoTD
 
         public void ChangeStrategy(Strategy strategy)
         {
-            switch(strategy)
+            switch (strategy)
             {
                 case Strategy.ClosestToGoal:
                     m_CurrentStrategy = ClosestTargetToGoal;
@@ -76,11 +76,14 @@ namespace ProtoTD
             var targets = m_Targets.OrderBy(x => x.Stats.GetBaseValue(EnemyStat.Health));
             return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.First();
         }
-     
     }
 
     public enum Strategy
     {
-        ClosestToGoal, FurthestFromGoal, Strongest, NotSlowed, NotSlowedAndStrongest
+        ClosestToGoal,
+        FurthestFromGoal,
+        Strongest,
+        NotSlowed,
+        NotSlowedAndStrongest
     }
 }
