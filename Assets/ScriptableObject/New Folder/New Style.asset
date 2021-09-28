@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf04d5eaec95dc47ae322fb42b70dc3, type: 3}
   m_Name: New Style
   m_EditorClassIdentifier: 
-  Background: {r: 0, g: 0, b: 0, a: 0}
-  OnBackGround: {r: 0, g: 0, b: 0, a: 0}
-  Primary: {r: 0, g: 0, b: 0, a: 0}
-  OnPrimary: {r: 0, g: 0, b: 0, a: 0}
-  TitleTextSize: 0
-  BodyTextSize: 0
-  FontStyle: {fileID: 0}
+  Background: {r: 1, g: 1, b: 1, a: 1}
+  OnBackGround: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+  Primary: {r: 1, g: 1, b: 1, a: 1}
+  OnPrimary: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 1}
+  TitleTextSize: 24
+  BodyTextSize: 12
+  FontStyle: {fileID: 11400000, guid: 66231529d52e07143bd2267f3dc5864a, type: 2}

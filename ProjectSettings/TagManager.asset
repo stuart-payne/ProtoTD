@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Waypoint
+  - Path
+  - End
+  - Spawn
+  - Enemy
+  - Tower
+  - Projectile
+  - TowerRange
+  - Title
+  - Button
   layers:
   - Default
   - TransparentFX
