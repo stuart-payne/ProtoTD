@@ -37,7 +37,7 @@ namespace ProtoTD
             var image = button.GetComponent<Image>();
             var imageSerObj = new SerializedObject(image);
             imageSerObj.FindProperty("m_Color").colorValue = m_Style.Primary;
-            buttonTextSerObj.FindProperty("m_Color").colorValue = m_Style.OnPrimary;
+            buttonTextSerObj.FindProperty("m_fontColor").colorValue = m_Style.OnPrimary;
             buttonTextSerObj.FindProperty("m_fontSize").floatValue = m_Style.BodyTextSize;
             SerializedProperty fontSerProp = buttonTextSerObj.FindProperty("m_fontAsset");
             fontSerProp.objectReferenceValue = m_Style.FontStyle;
@@ -49,7 +49,7 @@ namespace ProtoTD
         private void StyleTitle(TextMeshProUGUI titleText)
         {
             var textSerObj = new SerializedObject(titleText);
-            textSerObj.FindProperty("m_Color").colorValue = m_Style.OnBackGround;
+            textSerObj.FindProperty("m_fontColor").colorValue = m_Style.OnBackGround;
             textSerObj.FindProperty("m_fontSize").floatValue = m_Style.TitleTextSize;
             textSerObj.FindProperty("m_fontAsset").objectReferenceValue = m_Style.FontStyle;
             textSerObj.ApplyModifiedProperties();
@@ -58,7 +58,7 @@ namespace ProtoTD
         private void StyleBodyText(TextMeshProUGUI bodyText)
         {
             var textSerObj = new SerializedObject(bodyText);
-            textSerObj.FindProperty("m_Color").colorValue = m_Style.OnBackGround;
+            textSerObj.FindProperty("m_fontColor").colorValue = m_Style.OnBackGround;
             textSerObj.FindProperty("m_fontSize").floatValue = m_Style.BodyTextSize;
             textSerObj.FindProperty("m_fontAsset").objectReferenceValue = m_Style.FontStyle;
             textSerObj.ApplyModifiedProperties();

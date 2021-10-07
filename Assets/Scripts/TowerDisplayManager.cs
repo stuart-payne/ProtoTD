@@ -15,11 +15,11 @@ namespace ProtoTD
 
         readonly Dictionary<Strategy, string> m_StrategyStrings = new Dictionary<Strategy, string>
         {
-            { Strategy.ClosestToGoal, "First"},
-            { Strategy.FurthestFromGoal, "Last" },
-            { Strategy.Strongest, "Strongest" },
-            { Strategy.NotSlowed, "Not Slowed" },
-            { Strategy.NotSlowedAndStrongest, "Not Slow & Strong" }
+            { Strategy.ClosestToGoal, "FIRST"},
+            { Strategy.FurthestFromGoal, "LAST" },
+            { Strategy.Strongest, "STRONG" },
+            { Strategy.NotSlowed, "SLOW" },
+            { Strategy.NotSlowedAndStrongest, "SLOW+STR" }
         };
         // Start is called before the first frame update
         void Start()

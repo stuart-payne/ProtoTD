@@ -17,10 +17,10 @@ namespace ProtoTD
         private GameObject m_CurrentPlaceable;
         private Money m_Money;
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             m_Money = GetComponent<Money>();
-            m_BuildTowerDropdown.PopulateInterfaces(GetDropdownOptions(), index => SpawnPlaceableTower(index), 0);
+            // m_BuildTowerDropdown.PopulateInterfaces(GetDropdownOptions(), index => SpawnPlaceableTower(index), 0);
             //InvokeRepeating("SpawnEnemy", 2.0f, 2.0f);
         }
 

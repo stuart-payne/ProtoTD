@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: New Style
   m_EditorClassIdentifier: 
   Background: {r: 1, g: 1, b: 1, a: 1}
-  OnBackGround: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+  OnBackGround: {r: 1, g: 1, b: 1, a: 1}
   Primary: {r: 1, g: 1, b: 1, a: 1}
-  OnPrimary: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 1}
-  TitleTextSize: 24
+  OnPrimary: {r: 1, g: 1, b: 1, a: 1}
+  TitleTextSize: 12
   BodyTextSize: 12
-  FontStyle: {fileID: 11400000, guid: 66231529d52e07143bd2267f3dc5864a, type: 2}
+  FontStyle: {fileID: 11400000, guid: 8e49beeb3c35379489e2de00743f2bf7, type: 2}

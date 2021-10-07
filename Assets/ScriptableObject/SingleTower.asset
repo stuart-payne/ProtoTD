@@ -16,7 +16,7 @@ MonoBehaviour:
   Cost: 500
   Damage: 2
   FiringCooldown: 1
-  FiringRange: 5
+  FiringRange: 3
   AppliesStatusEffect: 0
   StatusEffect:
     Type: 3
