@@ -15,6 +15,7 @@ namespace ProtoTD
         [SerializeField] private UpgradePath[] m_UpgradePaths;
         [SerializeField] private SphereCollider TargetRangeCollider;
         [SerializeField] private GameObject m_RangeIndicator;
+        private RangeIndicator m_RangeIndicatorComp;
         protected Upgrader m_Upgrader;
         protected TargetSelector m_TargetSelector;
         protected bool m_ReadyToShoot = true;
@@ -29,8 +30,9 @@ namespace ProtoTD
         public void ActivateRangeIndicator()
         {
             m_RangeIndicator.SetActive(true);
-            var comp = m_RangeIndicator.GetComponent<RangeIndicator>();
-            comp.UpdateRadius(Stats.FiringRange);
+            if (!m_RangeIndicatorComp)
+                m_RangeIndicatorComp = m_RangeIndicator.GetComponent<RangeIndicator>();
+            m_RangeIndicatorComp.UpdateRadius(Stats.FiringRange);
         }
 
         public void DeactivateRangeIndicator() => m_RangeIndicator.SetActive(false);
@@ -56,6 +58,9 @@ namespace ProtoTD
         public void UpdateFiringRange()
         {
             TargetRangeCollider.radius = Stats.FiringRange;
+            if (!m_RangeIndicatorComp)
+                m_RangeIndicatorComp = m_RangeIndicator.GetComponent<RangeIndicator>();
+            m_RangeIndicatorComp.UpdateRadius(Stats.FiringRange);
         }
         
         public void UpdateDefaultStrategy()

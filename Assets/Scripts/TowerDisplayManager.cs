@@ -45,29 +45,34 @@ namespace ProtoTD
             {
                 m_TowerDisplayUI.DisableDisplay();
                 m_SelectedTower?.DeactivateRangeIndicator();
+                m_SelectedTower = null;
             }
         }
 
         void TowerDisplayListener(BaseTower tower)
         {
             // Debug.Log($"StatSO: {tower.Stats.Name} id: {tower.Id.ToString()}");
-            m_SelectedTower?.DeactivateRangeIndicator();
-            tower.ActivateRangeIndicator();
-            m_TowerDisplayUI.gameObject.SetActive(true);
-            m_SelectedTower = tower;
-            TowerStatsSO stats = tower.GetTowerStats;
-            m_TowerDisplayUI.TowerName.SetValue(stats.Name);
-            m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost.ToString()}");
-            m_TowerDisplayUI.Strategy.gameObject.SetActive(true);
-            string selectedStrategyStr = m_StrategyStrings[tower.GetTargetSelector.SelectedStrategy];
-            var stringList = GenerateStrategyList(tower);
-            int selectedInd = stringList.IndexOf(selectedStrategyStr);
-            m_TowerDisplayUI.Strategy.DropdownBuilder.PopulateInterfaces(stringList, ChangeTowerStrategy, selectedInd);
-            var upgrader = tower.GetUpgrader;
-            if (upgrader.Upgradeable())
-                m_TowerDisplayUI.AddUpgradeButtonListener(tower.GetUpgrader, m_FundChecker, m_FundRemover);
-            else
-                m_TowerDisplayUI.DisableUpgradeButton();
+            if(m_SelectedTower == null || tower.gameObject.GetInstanceID() != m_SelectedTower.gameObject.GetInstanceID())
+            {
+                m_SelectedTower?.DeactivateRangeIndicator();
+                tower.ActivateRangeIndicator();
+                m_TowerDisplayUI.gameObject.SetActive(true);
+                m_SelectedTower = tower;
+                TowerStatsSO stats = tower.GetTowerStats;
+                m_TowerDisplayUI.TowerName.SetValue(stats.Name);
+                m_TowerDisplayUI.Cost.SetValue($"$ {stats.Cost.ToString()}");
+                m_TowerDisplayUI.Strategy.gameObject.SetActive(true);
+                string selectedStrategyStr = m_StrategyStrings[tower.GetTargetSelector.SelectedStrategy];
+                var stringList = GenerateStrategyList(tower);
+                int selectedInd = stringList.IndexOf(selectedStrategyStr);
+                m_TowerDisplayUI.Strategy.DropdownBuilder.PopulateInterfaces(stringList, ChangeTowerStrategy, selectedInd);
+                var upgrader = tower.GetUpgrader;
+                if (upgrader.Upgradeable())
+                    m_TowerDisplayUI.AddUpgradeButtonListener(tower.GetUpgrader, m_FundChecker, m_FundRemover);
+                else
+                    m_TowerDisplayUI.DisableUpgradeButton();
+            }
+
 
         }
 
