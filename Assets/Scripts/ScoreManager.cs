@@ -73,7 +73,7 @@ namespace ProtoTD
         void GameOver()
         {
             Time.timeScale = 0.0f;
-            m_GameoverPanel.gameObject.SetActive(true);
+            m_GameoverPanel.transform.parent.gameObject.SetActive(true);
             m_GameoverPanel.GiveData(Score, m_LevelManager.RestartScene);
         }
     }
