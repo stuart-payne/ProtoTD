@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ProtoTD
@@ -19,6 +20,11 @@ namespace ProtoTD
                 dict.Add(stat.Stat, stat.Value);
             }
             return dict;
+        }
+
+        public int GetStatValue(EnemyStat stat)
+        {
+            return BaseStats.First(x => x.Stat == stat).Value;
         }
     }
 

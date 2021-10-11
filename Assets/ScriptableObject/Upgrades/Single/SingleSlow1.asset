@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Slow
   Cost: 500
   Damage: 2
-  FiringCooldown: 2
-  FiringRange: 5
+  FiringCooldown: 1
+  FiringRange: 3
   AppliesStatusEffect: 1
   StatusEffect:
     Type: 3

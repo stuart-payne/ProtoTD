@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Slow v2
   Cost: 1000
   Damage: 3
-  FiringCooldown: 2
-  FiringRange: 5
+  FiringCooldown: 1
+  FiringRange: 4
   AppliesStatusEffect: 1
   StatusEffect:
     Type: 3

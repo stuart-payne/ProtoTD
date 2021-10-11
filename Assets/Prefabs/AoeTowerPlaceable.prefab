@@ -104,6 +104,7 @@ MonoBehaviour:
   m_UnplaceableMat: {fileID: 2100000, guid: 3143de668aa86c740a52242ce4fde3dc, type: 2}
   m_PrefabToPlace: {fileID: 7537289244362786816, guid: 7dec74e876f4c2742a18a14d9c5d7e8e, type: 3}
   m_RangeIndicator: {fileID: 4161370655271634162}
+  m_Mesh: {fileID: 3793907683343693780}
 --- !u!54 &3793907683343693783
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ namespace ProtoTD
 {
     public class TargetSelector
     {
-        public GameObject CurrentTarget;
+        public Enemy CurrentTarget;
         public Strategy SelectedStrategy;
         private List<Enemy> m_Targets = new List<Enemy>();
         private Func<Enemy> m_CurrentStrategy;
@@ -21,7 +21,7 @@ namespace ProtoTD
         {
             if (m_Targets.Count == 0)
                 return false;
-            CurrentTarget = m_CurrentStrategy().gameObject;
+            CurrentTarget = m_CurrentStrategy();
             return true;
         }
 
@@ -59,7 +59,7 @@ namespace ProtoTD
             SelectedStrategy = strategy;
         }
 
-        Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).First();
+        Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).First(x => x.Stats[EnemyStat.Health] > 0);
 
         Enemy FurthestTargetFromGoal() => m_Targets.OrderByDescending(x => x.GetDistanceFromEnd()).First();
 

@@ -19,7 +19,7 @@ namespace ProtoTD
 
         protected override void Fire()
         {
-            var enemyComp = m_TargetSelector.CurrentTarget.GetComponent<Enemy>();
+            var enemyComp = m_TargetSelector.CurrentTarget;
             enemyComp.DealDamage(Stats.Damage);
             if (Stats.AppliesStatusEffect)
                 enemyComp.Stats.StatusEffects.Add(Stats.StatusEffect);

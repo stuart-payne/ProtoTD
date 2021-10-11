@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3fb537644c05645873781aed2b6f0f, type: 3}
-  m_Name: FastEnemy
+  m_Script: {fileID: 11500000, guid: d3ebbbb0beb34bd4a8a94c72944cca35, type: 3}
+  m_Name: Wave 10
   m_EditorClassIdentifier: 
-  Name: Fast
-  BaseStats:
-  - Stat: 0
-    Value: 2
-  - Stat: 1
-    Value: 100
-  - Stat: 2
-    Value: 100
-  - Stat: 3
-    Value: 10
+  SpawnStrings: []

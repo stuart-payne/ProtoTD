@@ -77,7 +77,6 @@ namespace ProtoTD
                     Fire();
                     m_ReadyToShoot = false;
                     StartCoroutine(ShootCooldown());
-
                 }
             }
         }
