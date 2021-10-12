@@ -37,38 +37,29 @@ namespace ProtoTD
 
         public void ChangeStrategy(Strategy strategy)
         {
-            switch (strategy)
+            m_CurrentStrategy = strategy switch
             {
-                case Strategy.ClosestToGoal:
-                    m_CurrentStrategy = ClosestTargetToGoal;
-                    break;
-                case Strategy.FurthestFromGoal:
-                    m_CurrentStrategy = FurthestTargetFromGoal;
-                    break;
-                case Strategy.Strongest:
-                    m_CurrentStrategy = StrongestEnemy;
-                    break;
-                case Strategy.NotSlowed:
-                    m_CurrentStrategy = NotSlowedAndClosestToEnd;
-                    break;
-                case Strategy.NotSlowedAndStrongest:
-                    m_CurrentStrategy = NotSlowedAndStrongest;
-                    break;
-            }
+                Strategy.ClosestToGoal => ClosestTargetToGoal,
+                Strategy.FurthestFromGoal => FurthestTargetFromGoal,
+                Strategy.Strongest => StrongestEnemy,
+                Strategy.NotSlowed => NotSlowedAndClosestToEnd,
+                Strategy.NotSlowedAndStrongest => NotSlowedAndStrongest,
+                _ => m_CurrentStrategy
+            };
 
             SelectedStrategy = strategy;
         }
 
-        Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).First(x => x.Stats[EnemyStat.Health] > 0);
+        Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).FirstOrDefault(x => x.Stats[EnemyStat.Health] > 0);
 
-        Enemy FurthestTargetFromGoal() => m_Targets.OrderByDescending(x => x.GetDistanceFromEnd()).First();
+        Enemy FurthestTargetFromGoal() => m_Targets.OrderByDescending(x => x.GetDistanceFromEnd()).FirstOrDefault();
 
-        Enemy StrongestEnemy() => m_Targets.OrderByDescending(x => x.Stats.GetBaseValue(EnemyStat.Health)).First();
+        Enemy StrongestEnemy() => m_Targets.OrderByDescending(x => x.Stats.GetBaseValue(EnemyStat.Health)).FirstOrDefault();
 
         Enemy NotSlowedAndClosestToEnd()
         {
             var targets = m_Targets.OrderBy(x => x.GetDistanceFromEnd());
-            return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.First();
+            return targets.FirstOrDefault(x => !x.Stats.StatusEffects.Has(EnemyStat.Speed)) ?? targets.FirstOrDefault();
         }
 
         Enemy NotSlowedAndStrongest()

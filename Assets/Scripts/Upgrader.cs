@@ -41,7 +41,7 @@ namespace ProtoTD
             {
                 m_UpgradePathChoice = choice;
             }
-            m_Tower.Stats = m_UpgradePaths[choice].UpgradeList[Level - 1];
+            m_Tower.Stats = m_UpgradePaths[m_UpgradePathChoice].UpgradeList[Level - 1];
             m_Tower.UpdateFiringRange();
             m_Tower.DeactivateRangeIndicator();
             m_Tower.UpdateDefaultStrategy();

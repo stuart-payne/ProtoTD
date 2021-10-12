@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ProtoTD
 {
@@ -14,13 +15,14 @@ namespace ProtoTD
         public Button button;
 
         [SerializeField] private GameObject m_GameWinPanel;
-        
+        [SerializeField] private TextMeshProUGUI m_WaveTextLabel;
+
         private SpawnManager m_Spawner;
         private WaveEnumerator m_WaveEnumerator;
         private WaveSO m_CurrentWave;
         private int m_EnemiesInPlay = 0;
-        
-        
+
+
         public void StartWave()
         {
             if (m_WaveEnumerator.MoveNext())
@@ -37,7 +39,7 @@ namespace ProtoTD
         }
 
         private void CountEnemyCallback(StatContainer<EnemyStat> stat) => m_EnemiesInPlay--;
-        
+
         private void Start()
         {
             IsWaveInProgress = false;
@@ -45,6 +47,7 @@ namespace ProtoTD
             m_WaveEnumerator = new WaveEnumerator(Waves);
             Enemy.OnDeathEvent += CountEnemyCallback;
             Enemy.OnReachEndEvent += CountEnemyCallback;
+            SetTextLabel();
         }
 
         private void OnDestroy()
@@ -55,23 +58,25 @@ namespace ProtoTD
 
         private void Update()
         {
-            if (IsWaveInProgress)
-                button.interactable = false;
-            else
-                button.interactable = true;
-            
-            if(!IsWaveInProgress && m_EnemiesInPlay == 0 && m_WaveEnumerator.IsAtEnd)
+            button.interactable = !IsWaveInProgress;
+
+            if (!IsWaveInProgress && m_EnemiesInPlay == 0 && m_WaveEnumerator.IsAtEnd)
                 m_GameWinPanel.SetActive(true);
         }
 
+        private void SetTextLabel()
+        {
+            m_WaveTextLabel.text = $"{(m_WaveEnumerator.CurrentIndex + 1).ToString()}/{m_WaveEnumerator.Total.ToString()}";
+        }
 
         IEnumerator ExecuteWave(WaveSO wave)
         {
+            SetTextLabel();
             foreach (var enemyString in wave.SpawnStrings)
             {
                 yield return StartCoroutine(ExecuteEnemyString(enemyString));
             }
-            
+
             IsWaveInProgress = false;
         }
 
@@ -105,6 +110,7 @@ namespace ProtoTD
             {
                 return false;
             }
+
             m_CurrentWave = m_Waves[m_CurrentIndex];
             return true;
         }
@@ -121,6 +127,7 @@ namespace ProtoTD
         public int CurrentIndex => m_CurrentIndex;
 
         public bool IsAtEnd => m_CurrentIndex + 1 >= m_Waves.Length;
+        public int Total => m_Waves.Length;
         object IEnumerator.Current => Current;
     }
 }
