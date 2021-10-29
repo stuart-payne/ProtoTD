@@ -14,6 +14,7 @@ namespace ProtoTD
     public class StatusEffect<T> where T: Enum
     {
         public T Type;
+        [Range(0.1f, 2.0f)]
         public float Intensity;
         public float Duration;
     }

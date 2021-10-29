@@ -17,7 +17,7 @@ namespace ProtoTD
 
         private int m_WaypointIndex;
         private Vector3 m_CurrentWaypoint;
-        private readonly HashSet<ITargeter> m_towersTargetedBy = new HashSet<ITargeter>();
+        private readonly HashSet<ITargeter> m_TowersTargetedBy = new HashSet<ITargeter>();
 
         public float Speed => Stats[EnemyStat.Speed];
 
@@ -47,8 +47,7 @@ namespace ProtoTD
 
         private bool DeathCheck(int health)
         {
-            var check = health <= 0;
-            return check;
+            return health <= 0;
         }
 
         // Update is called once per frame
@@ -82,7 +81,7 @@ namespace ProtoTD
             {
                 var tower = other.GetComponentInParent<BaseTower>();
                 tower.RegisterTarget(this);
-                m_towersTargetedBy.Add(tower);
+                m_TowersTargetedBy.Add(tower);
             }
             else if (other.CompareTag("Projectile"))
             {
@@ -100,12 +99,12 @@ namespace ProtoTD
             if (!other.CompareTag("TowerRange")) return;
             var tower = other.GetComponentInParent<BaseTower>();
             tower.DeregisterTarget(this);
-            m_towersTargetedBy.Remove(tower);
+            m_TowersTargetedBy.Remove(tower);
         }
 
         private void OnDestroy()
         {
-            foreach (BaseTower tower in m_towersTargetedBy) tower.DeregisterTarget(this);
+            foreach (BaseTower tower in m_TowersTargetedBy) tower.DeregisterTarget(this);
         }
 
         public static event Action<StatContainer<EnemyStat>> OnDeathEvent;

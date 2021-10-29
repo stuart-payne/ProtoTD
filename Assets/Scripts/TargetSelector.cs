@@ -50,7 +50,12 @@ namespace ProtoTD
             SelectedStrategy = strategy;
         }
 
-        Enemy ClosestTargetToGoal() => m_Targets.OrderBy(x => x.GetDistanceFromEnd()).FirstOrDefault(x => x.Stats[EnemyStat.Health] > 0);
+        private Enemy ClosestTargetToGoal()
+        {
+            return m_Targets
+                .OrderBy(x => x.GetDistanceFromEnd())
+                .FirstOrDefault(x => x.Stats[EnemyStat.Health] > 0);
+        }
 
         Enemy FurthestTargetFromGoal() => m_Targets.OrderByDescending(x => x.GetDistanceFromEnd()).FirstOrDefault();
 

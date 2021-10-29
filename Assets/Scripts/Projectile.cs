@@ -7,11 +7,10 @@ namespace ProtoTD
     {
         public int Damage = 2;
         public GameObject Target;
-        private StatusEffect<EnemyStat> m_StatusEffect;
         [SerializeField] float speed = 20.0f;
         [SerializeField] float lifeTime = 10.0f;
 
-        public StatusEffect<EnemyStat> StatusEffect { get => m_StatusEffect; set => m_StatusEffect = value; }
+        public StatusEffect<EnemyStat> StatusEffect { get; set; }
 
         private void Start()
         {

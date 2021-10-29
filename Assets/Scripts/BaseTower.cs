@@ -37,15 +37,9 @@ namespace ProtoTD
 
         public void DeactivateRangeIndicator() => m_RangeIndicator.SetActive(false);
         
-        public void RegisterTarget(Enemy target)
-        {
-            m_TargetSelector.AddTarget(target);
-        }
+        public void RegisterTarget(Enemy target) => m_TargetSelector.AddTarget(target);
 
-        public void DeregisterTarget(Enemy target)
-        {
-            m_TargetSelector.RemoveTarget(target);
-        }
+        public void DeregisterTarget(Enemy target) => m_TargetSelector.RemoveTarget(target);
 
         protected virtual void Start()
         {
@@ -83,7 +77,7 @@ namespace ProtoTD
 
         protected abstract void Fire();
 
-        protected IEnumerator ShootCooldown()
+        private IEnumerator ShootCooldown()
         {
             yield return new WaitForSeconds(Stats.FiringCooldown);
             m_ReadyToShoot = true;
