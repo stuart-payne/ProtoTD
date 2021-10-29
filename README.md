@@ -13,6 +13,6 @@ Open Unity Hub and press the Add button in the Projects tab and chose the folder
 # Articles
 
 I have written some articles about the development of the game on my personal site:
--[Target Selection](https://stuart-payne.co.uk/posts/2021/10/target-selection/)
--[Stat Collection](https://stuart-payne.co.uk/posts/2021/10/stat-collection/)
+- [Target Selection](https://stuart-payne.co.uk/posts/2021/10/target-selection/)
+- [Stat Collection](https://stuart-payne.co.uk/posts/2021/10/stat-collection/)
 - [Serialization Trap](https://stuart-payne.co.uk/posts/2021/10/the-serialization-trap/)
